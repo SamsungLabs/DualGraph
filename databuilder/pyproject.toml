@@ -1,0 +1,74 @@
+[tool.poetry]
+name = "databuilder"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+
+[tool.poetry-exec-plugin.commands]
+black = "black --check --diff databuilder/"
+blackf = "black databuilder/"
+isort = "isort --profile=black --check-only --diff databuilder/"
+isortf = "isort --profile=black databuilder/"
+mypy = "mypy --ignore-missing-imports --check-untyped-defs databuilder/"
+pylint = "pylint --rcfile=pyproject.toml databuilder/"
+
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+bs4 = "0.0.2"
+pandas = "2.3.3"
+tqdm = "4.67.1"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+black = "24.10.0"
+isort = "5.13.2"
+mypy = "1.13.0"
+pylint = "4.0.3"
+
+
+[tool.pylint.main]
+fail-under = 10
+
+[tool.pylint.basic]
+good-names = ["i", "j", "k", "ex", "Run", "_", "x", "x_", "fp", "fh", "parse_A", "parse_B", "parse_C"]
+
+[tool.pylint.design]
+max-args = 12
+max-attributes = 16
+max-locals = 24
+max-positional-arguments = 8
+min-public-methods = 1
+
+[tool.pylint."messages control"]
+disable = [
+    "raw-checker-failed",
+    "bad-inline-option",
+    "locally-disabled",
+    "file-ignored",
+    "suppressed-message",
+    "useless-suppression",
+    "deprecated-pragma",
+    "use-symbolic-message-instead",
+    "use-implicit-booleaness-not-comparison-to-string",
+    "use-implicit-booleaness-not-comparison-to-zero",
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "global-statement",
+]
+
+[tool.pylint.similarities]
+min-similarity-lines = 24
+
+[tool.isort]
+profile = "black"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

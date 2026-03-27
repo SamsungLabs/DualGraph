@@ -1,0 +1,3 @@
+@prefix skg: <https://samsung.com/AIC-Warsaw/SKG#> .
+@prefix utkg: <https://samsung.com/AIC-Warsaw/UnweaverTKG#> .
+[?p, skg:alignsWith, ?q] :- [?p, skg:hasName, ?name], [?q, utkg:hasName, ?name] .

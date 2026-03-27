@@ -1,0 +1,131 @@
+{
+  "general": {
+    "use_cache_llm": false,
+    "use_cache_embedder": false,
+    "vector_storage_name": "lancedb",
+    "remote_mlflow_uri": "http://IP_ADDRESS:PORT/",
+    "experiment_name_index": "DualGraph Indexing",
+    "experiment_name_query": "DualGraph Querying",
+    "llm": {
+      "max_async": 8,
+      "base_urls": [
+        "http://IP_ADDRESS:PORT/v1",
+        "http://IP_ADDRESS:PORT/v1",
+        "http://IP_ADDRESS:PORT/v1",
+        "http://IP_ADDRESS:PORT/v1"
+      ],
+      "api_keys": [
+        [
+          "somekey-4321"
+        ],
+        [
+          "somekey-4321"
+        ],
+        [
+          "somekey-4321"
+        ],
+        [
+          "somekey-4321"
+        ]
+      ],
+      "model": "openai/gpt-oss-120b",
+      "timeout": 300,
+      "max_token_size": 32768,
+      "postprocess_thinking": true,
+      "enable_thinking": false
+    },
+    "graph_storage": {
+      "rdfox_cert_verify": false,
+      "rdfox_url": "https://IP_ADDRESS:PORT",
+      "rdfox_dstore": "rdfox_dstore",
+      "rdfox_user": "",
+      "rdfox_passphrase": "",
+      "rdfox_drop_on_store": true
+    },
+    "tokenizer": {
+      "model": "openai/gpt-oss-120b"
+    },
+    "embedder": {
+      "max_async": 8,
+      "base_urls": [
+        "http://IP_ADDRESS:PORT",
+        "http://IP_ADDRESS:PORT",
+        "http://IP_ADDRESS:PORT",
+        "http://IP_ADDRESS:PORT"
+      ],
+      "api_keys": [
+        [
+          "somekey-4321"
+        ],
+        [
+          "somekey-4321"
+        ],
+        [
+          "somekey-4321"
+        ],
+        [
+          "somekey-4321"
+        ]
+      ],
+      "model": "Qwen/Qwen3-Embedding-4B",
+      "embedding_dim": 2560,
+      "max_token_size": 40960,
+      "batch_size": 32,
+      "timeout": 300
+    },
+    "prompts": {
+      "extraction_prompt_template": "prompts/extraction.txt",
+      "querying_prompt_template": "prompts/query.txt",
+      "summarization_prompt_template": "prompts/summarization.txt",
+      "no_data_response": "prompts/no_data_response.txt",
+      "sparql_kg_query_generation_prompt_template": "prompts/sparql_kg_query_generation.txt"
+    }
+  },
+  "query": {
+    "use_retrieval_routing": false,
+    "mock_retrieval": false,
+    "fallback_to_tkg": true,
+    "retrieval_methods": [
+      "tkg"
+    ],
+    "naive": {
+      "retrieve_top_k": 5,
+      "chunks_max_token_size": 4000,
+      "chunks_table_format": "csv"
+    },
+    "tkg": {
+      "retrieve_top_k_ents": 10,
+      "retrieve_top_k_chunks": 5,
+      "chunks_max_token_size": 4000,
+      "chunks_table_format": "csv"
+    },
+    "sparql": {
+      "retrieve_top_k_specs": 5,
+      "retrieve_top_k_features": 5,
+      "retrieve_top_k_categories": 5,
+      "retrieve_top_k_entities": 5,
+      "n_generated_queries": 3,
+      "use_beam_search": false,
+      "query_result_limit": 100
+    },
+    "router": {
+      "retrieval_routing_method": "BaselineLLMRouter",
+      "retrieval_routing_source": "Samsung UK",
+      "retrieval_routing_select_multiple": false,
+      "retrieval_routing_methods": [
+        "sparql",
+        "tkg"
+      ]
+    }
+  },
+  "index": {
+    "chunker": {
+      "strategy": "by_marker",
+      "max_token_size": 1500,
+      "overlap_token_size": 128
+    },
+    "extraction": {
+      "summarization_threshold": 4000
+    }
+  }
+}

@@ -1,0 +1,35 @@
+@prefix skg: <https://samsung.com/AIC-Warsaw/SKG#> .
+@prefix utkg: <https://samsung.com/AIC-Warsaw/UnweaverTKG#> .
+[?s, a, skgt:SKG_Entity] :- [?s, a, ?c], FILTER(?c != skgt:UTKG_Entity) .
+[?p, skg:hasFeature, ?f], [?f, rdf:type, skgt:Feature] :-
+    [?p, skg:hasSpec, ?s], [?s, skg:inEntry, ?f], [?s, skg:hasValue, skg:yes] .
+[?p, skg:hasFeature, skg:8k_recording_support], [skg:8k_recording_support, rdf:type, skgt:Feature],
+  [skg:8k_recording_support, skg:hasName, "8K Recording Support"] :- 
+    [?p, skg:hasSpec, ?s], [?s, skg:inEntry, skg:video_recording_resolution],
+    [?s, skg:hasValue, ?f], FILTER(REGEX(str(?f), "8k")) .
+[?p, skg:hasFeature, skg:5g_support], [skg:5g_support, rdf:type, skgt:Feature],
+  [skg:5g_support, skg:hasName, "5G Support"] :- 
+    [?p, skg:hasSpec, ?s], [?s, skg:hasValue, ?f5g],
+    FILTER (?f5g IN (skg:5g_sub6_fdd, skg:5g_sub6_tdd, skg:5g_sub6_sdl ) ) .
+[?p, skg:hasFeature, skg:4g_support], [skg:4g_support, rdf:type, skgt:Feature],
+  [skg:4g_support, skg:hasName, "4G Support"] :-
+    [?p, skg:hasSpec, ?s], [?s, skg:hasValue, ?f4g],
+    FILTER (?f4g IN (skg:4g_lte_fdd, skg:4g_lte_tdd ) ) .
+[?product, skg:hasPrice, ?price] :- 
+    [?product, skg:hasSpec, ?spec], [?spec, skg:inEntry, ?entry],
+    [?entry, skg:hasName, "Price"], [?spec, skg:hasValue, ?price] .
+[?p, skg:belongs, ?c] :- [?p, skg:variantOf, ?pr], [?pr, skg:belongs, ?c] .
+[?prange, skg:hasSpec, ?samplespec] :-
+    [?prange, a, skgt:ProductRange],
+    [?prod, skg:variantOf, ?prange],
+    FILTER (?prod != ?prange),
+    [?prod, skg:hasSpec, ?spec],
+    [?spec, skg:inEntry, ?ent],
+    [?spec, skg:inSection, ?sect],
+    [?spec, skg:hasValue, ?val],
+    AGGREGATE(
+        BIND COUNT (DISTINCT ?val) as ?valc
+        BIND MIN(?spec) as ?samplespec
+        ON ?prange, ?sect, ?ent, ?inEntry
+    ),
+    FILTER (?valc == 1)
