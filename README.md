@@ -26,6 +26,6 @@ See individual directory READMEs for detailed usage instructions.
 
 This project is licensed under the terms of the MIT license. See [LICENSE](./LICENSE.md) for details.
 
-> **Note:** Portions of the code in this directory are adapted from [Nano Graph RAG](https://github.com/gusye1234/nano-graphrag). Their original license is included and can be found in [LICENSE_nano-graphrag](./LICENSE_nano-graphrag).
+> **Note:** Portions of the code in this directory are adapted from [Nano Graph RAG](https://github.com/gusye1234/nano-graphrag). Their original license is included and can be found in [LICENSE_nano-graphrag](./dualgraphrag/LICENSE_nano-graphrag.md).
 
  © 2026 Samsung Labs. All rights reserved.
