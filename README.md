@@ -19,3 +19,13 @@ See individual directory READMEs for detailed usage instructions.
 
 - **DualGraph_scraping**: Code used to scrape the SpecsQA dataset - https://github.com/SamsungLabs/DualGraph_scraping
 - **DualGraph_dataset**: Raw scraped data for SpecsQA dataset - https://github.com/SamsungLabs/DualGraph_dataset
+
+
+
+## License
+
+This project is licensed under the terms of the MIT license. See [LICENSE](./LICENSE.md) for details.
+
+> **Note:** Portions of the code in this directory are adapted from [Nano Graph RAG](https://github.com/gusye1234/nano-graphrag). Their original license is included and can be found in [LICENSE_nano-graphrag](./LICENSE_nano-graphrag).
+
+ © 2026 Samsung Labs. All rights reserved.
